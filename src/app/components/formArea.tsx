@@ -2,25 +2,46 @@
 import { formIndex } from "./form";
 import Image from "next/image";
 import SoftcomLogo from "../imgs/softcom.png";
-import { useRef } from "react";
-import axios from "axios";
+import { useRef, useState } from "react";
+import ValidateNcmSearch from "../hooks/validateNcmSearch";
+import INcmSearch from "../lib/INcmSearch";
 
 export default function FormArea() {
   const inputSearch = useRef<HTMLInputElement | null>(null);
+  const [data, setData] = useState<INcmSearch | null>(null);
+  const [erroValidation, setErroValidation] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(inputSearch.current?.value) {
-      if( inputSearch.current?.value.length < 8 || inputSearch.current?.value.length > 8 ) {
-        console.log("Maior ou menor que 8")
+   
+      setLoading(true);
+      const inputValue = inputSearch.current?.value || "";
+
+      if (!/^\d+$/.test(inputValue)) {
+        setErroValidation("O NCM deve conter apenas números");
+        setTimeout(() => {
+          setErroValidation(null);
+          setLoading(false)
+        }, 3000);
+        return;
       }
-      else {
-        axios.get(`https://ncm-nine.vercel.app/api/${inputSearch.current.value}`).then(response => {
-          console.log(response.data)
-        })
-        .catch(error => console.log(error))
-      }
-    }
+
+      const respostaApi = await ValidateNcmSearch({ inputValue })
+  
+        if(respostaApi)
+        if (respostaApi.Status === "2") {
+          setErroValidation("É inválido porém possui similares");
+        } else if (respostaApi.Status === "4") {
+          setErroValidation("Ncm inválido e não possui similares");
+        } else {
+          setData(respostaApi);
+        }
+
+    setTimeout(() => {
+      setErroValidation(null);
+      setLoading(false)
+    }, 3000);
   };
 
   return (
@@ -39,7 +60,12 @@ export default function FormArea() {
           type="text"
           inputRef={inputSearch}
         />
-        <formIndex.ButtonForm Texto="Pesquisar" />
+        {erroValidation && (
+          <p className="text-red-500 text-[0.8rem] font-semibold">
+            {erroValidation}
+          </p>
+        )}
+        <formIndex.ButtonForm Texto={loading ? "Carregando..." : "Pesquisar"} />
       </formIndex.formWrapper>
     </div>
   );

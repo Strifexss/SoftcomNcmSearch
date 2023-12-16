@@ -9,7 +9,6 @@ export default function ImageArea() {
           width={1000}
           height={1000}
           alt='Softcom'
-          objectFit='cover'
           />
         </div>
     )
