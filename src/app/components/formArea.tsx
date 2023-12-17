@@ -40,8 +40,10 @@ export default function FormArea({setNcmData, showData}:Props) {
         } else if (respostaApi.Status === "4") {
           setErroValidation("Ncm inválido e não possui similares");
         } else {
+          console.log(respostaApi)
           setNcmData(respostaApi);
           showData(true)
+            
         }
 
     setTimeout(() => {

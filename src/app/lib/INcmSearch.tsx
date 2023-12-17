@@ -1,8 +1,8 @@
 export default interface INcmSearch {
-    Ncm: string,
+    NCM: string,
     Status: string,
     Descricao: string,
-    UnidadeTributaria: string,
+    uTrib: string,
     Concatenado: string,
     Error?: string
 }

@@ -25,6 +25,7 @@ export default function Home() {
           </h1>
           { showNcmModal &&
             <NcmDados
+              Data={data}
               handleClose={setShowNcmModal}
             />
           }
