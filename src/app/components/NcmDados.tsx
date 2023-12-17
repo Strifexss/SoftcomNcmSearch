@@ -1,5 +1,4 @@
-import { SetStateAction, useEffect } from "react";
-import { X } from "lucide";
+import { SetStateAction } from "react";
 import INcmSearch from "../lib/INcmSearch";
 
 interface Props {
@@ -30,28 +29,45 @@ export default function NcmDados({handleClose, Data}:Props) {
                     </div>                
                     <div className="flex flex-col gap-2">
                         <h1 className="text-white font-semibold">
-                            Descrição
+                            {
+                                Data?.Status === "2" ? "Similares" : "Descrição"
+                            }
                         </h1>
-                        <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
+                       
+                       { Data?.Status === "2" ? Data.Descricao_Similares.map((Descricoes, index) => {
+
+                        const valorSimilar = Data.Similares[index];
+                        const UnidadeTribSimilar = Data.uTrib[index];
+
+                        return (
+                            <h1 key={Descricoes} className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
+                              {valorSimilar} | {Descricoes} | {UnidadeTribSimilar} 
+                            </h1>
+                        )})
+                         : 
+                         <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
                             {Data?.Descricao}
                         </h1>
+                        }
                     </div>                
                     <div className="flex flex-col gap-2">
                         <h1 className="text-white font-semibold">
                             Status
                         </h1>
                         <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
-                            {Data?.Status}
+                            {Data?.Status === "1" ? "Válido" : "Inválido"}
                         </h1>
                     </div>                
-                    <div className="flex flex-col gap-2">
+                    { Data?.Status === "1" &&
+                        <div className="flex flex-col gap-2">
                         <h1 className="text-white font-semibold">
                             Unidade Tributária
                         </h1>
                         <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
                             {Data?.uTrib}
                         </h1>
-                    </div>                
+                    </div>
+                    }                
                     <div className="flex flex-col gap-2">
                         <h1 className="text-white font-semibold">
                             Descrição detalhada

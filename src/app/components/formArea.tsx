@@ -35,15 +35,13 @@ export default function FormArea({setNcmData, showData}:Props) {
       const respostaApi = await ValidateNcmSearch({ inputValue })
   
         if(respostaApi)
-        if (respostaApi.Status === "2") {
-          setErroValidation("É inválido porém possui similares");
-        } else if (respostaApi.Status === "4") {
+         if (respostaApi.Status === "4") {
           setErroValidation("Ncm inválido e não possui similares");
         } else {
           console.log(respostaApi)
           setNcmData(respostaApi);
           showData(true)
-            
+
         }
 
     setTimeout(() => {

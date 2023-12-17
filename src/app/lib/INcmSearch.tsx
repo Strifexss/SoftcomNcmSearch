@@ -4,5 +4,7 @@ export default interface INcmSearch {
     Descricao: string,
     uTrib: string,
     Concatenado: string,
-    Error?: string
+    Error?: string,
+    Descricao_Similares: string[],
+    Similares: string[]
 }
