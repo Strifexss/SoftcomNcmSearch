@@ -1,5 +1,6 @@
 import { SetStateAction } from "react";
 import INcmSearch from "../lib/INcmSearch";
+import {motion} from "framer-motion"
 
 interface Props {
     handleClose: React.Dispatch<SetStateAction<boolean>>,
@@ -10,7 +11,11 @@ export default function NcmDados({handleClose, Data}:Props) {
 
     return(
 
-        <div className="w-screen h-screen md:w-[75vw] md:h-[80vh] gap-6 bg-zinc-900 flex flex-col items-end absolute p-4 md:p-10 overflow-y-scroll xl:text-[0.8rem] 2xl:text-[0.9rem]">
+        <motion.div 
+        initial={{y: 60, opacity: 0}}
+        animate={{y: 0, opacity: 1}}
+        transition={{duration: 0.5}}
+        className="w-screen h-screen md:w-[75vw] md:h-[80vh] gap-6 bg-zinc-900 flex flex-col items-end absolute p-4 md:p-10 overflow-y-scroll xl:text-[0.8rem] 2xl:text-[0.9rem] no-scrollbar">
             
                 <header className="w-full flex justify-end">
                     <button onClick={() => handleClose(false)}
@@ -77,6 +82,6 @@ export default function NcmDados({handleClose, Data}:Props) {
                         </h1>
                     </div>   
                 </div>
-        </div>
+        </motion.div>
     )
 }

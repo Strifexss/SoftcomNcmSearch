@@ -31,13 +31,21 @@ export default function FormArea({setNcmData, showData}:Props) {
         }, 3000);
         return;
       }
+      if(inputValue.length !== 8) {
+        setErroValidation("O NCM precisa conter 8 números")
+        setTimeout(() => {
+          setErroValidation(null);
+          setLoading(false)
+        }, 3000);
+      }
 
       const respostaApi = await ValidateNcmSearch({ inputValue })
   
         if(respostaApi)
          if (respostaApi.Status === "4") {
           setErroValidation("Ncm inválido e não possui similares");
-        } else {
+        } 
+        else {
           setNcmData(respostaApi);
           showData(true)
 
