@@ -2,13 +2,18 @@
 import { formIndex } from "./form";
 import Image from "next/image";
 import SoftcomLogo from "../imgs/softcom.png";
-import { useRef, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 import ValidateNcmSearch from "../hooks/validateNcmSearch";
 import INcmSearch from "../lib/INcmSearch";
 
-export default function FormArea() {
+interface Props {
+  setNcmData: React.Dispatch<SetStateAction<INcmSearch | null>>,
+  showData: React.Dispatch<SetStateAction<boolean>>
+}
+
+export default function FormArea({setNcmData, showData}:Props) {
   const inputSearch = useRef<HTMLInputElement | null>(null);
-  const [data, setData] = useState<INcmSearch | null>(null);
+  
   const [erroValidation, setErroValidation] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +40,8 @@ export default function FormArea() {
         } else if (respostaApi.Status === "4") {
           setErroValidation("Ncm inválido e não possui similares");
         } else {
-          setData(respostaApi);
+          setNcmData(respostaApi);
+          showData(true)
         }
 
     setTimeout(() => {
