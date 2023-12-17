@@ -21,7 +21,7 @@ export default function Home() {
             showData={setShowNcmModal}
           />
           <h1 className='absolute right-0 text-[0.6rem] m-2 text-gray-500 bottom-0'>
-            Desenvolvido por Lins e Killberty
+            Desenvolvido por Lins e Kilberty
           </h1>
           { showNcmModal &&
             <NcmDados
