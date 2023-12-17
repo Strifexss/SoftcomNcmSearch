@@ -20,7 +20,7 @@ export default function NcmDados({handleClose, Data}:Props) {
                 </header>
                 <div className="w-full flex justify-center flex-col gap-8">
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-white font-semibold">
+                        <h1 className="text-orange-400 font-semibold">
                             Ncm:
                         </h1>
                         <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
@@ -28,7 +28,7 @@ export default function NcmDados({handleClose, Data}:Props) {
                         </h1>
                     </div>                
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-white font-semibold">
+                        <h1 className="text-orange-400 font-semibold">
                             {
                                 Data?.Status === "2" ? "Similares" : "Descrição"
                             }
@@ -41,7 +41,7 @@ export default function NcmDados({handleClose, Data}:Props) {
 
                         return (
                             <h1 key={Descricoes} className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
-                              {valorSimilar} | {Descricoes} | {UnidadeTribSimilar} 
+                              {valorSimilar} <span className="text-orange-400">|</span> {Descricoes} <span className="text-orange-400">|</span> {UnidadeTribSimilar} 
                             </h1>
                         )})
                          : 
@@ -51,7 +51,7 @@ export default function NcmDados({handleClose, Data}:Props) {
                         }
                     </div>                
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-white font-semibold">
+                        <h1 className="text-orange-400 font-semibold">
                             Status
                         </h1>
                         <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
@@ -60,7 +60,7 @@ export default function NcmDados({handleClose, Data}:Props) {
                     </div>                
                     { Data?.Status === "1" &&
                         <div className="flex flex-col gap-2">
-                        <h1 className="text-white font-semibold">
+                        <h1 className="text-orange-400 font-semibold">
                             Unidade Tributária
                         </h1>
                         <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
@@ -69,7 +69,7 @@ export default function NcmDados({handleClose, Data}:Props) {
                     </div>
                     }                
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-white font-semibold">
+                        <h1 className="text-orange-400 font-semibold">
                             Descrição detalhada
                         </h1>
                         <h1 className="p-2 bg-zinc-700 border-b-gray-500 border-b-4 text-white font-semibold">
